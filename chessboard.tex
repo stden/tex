@@ -1,0 +1,28 @@
+% arara: pdflatex
+% !arara: indent: {overwrite: yes}
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{python}
+
+\begin{document}
+
+%\begin{python}[optional.py]
+%print("42")
+%\end{python}
+
+\definecolor{gray2}{gray}{0.33}
+\definecolor{gray3}{gray}{0.66}
+
+\def\colors{{"white", "gray3", "gray2", "black"}}%
+
+\begin{tikzpicture}[x=1cm]
+    \foreach \x in {0,...,7} \foreach \y in {0,...,7}
+    {
+        \pgfmathparse{\colors[mod(\x+\y,4)]}
+        \edef\colour{\pgfmathresult}
+        \path[fill=\colour] (\x,\y) rectangle ++ (1,1);
+    }
+    \draw (0,0)--(0,8)--(8,8)--(8,0)--cycle;
+\end{tikzpicture}
+
+\end{document}
