@@ -1,0 +1,18 @@
+% arara: pdflatex
+% !arara: indent: {overwrite: yes}
+\documentclass{standalone}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[x=1cm]
+    \foreach \x in {0,...,7} \foreach \y in {0,...,7}
+    {
+        \pgfmathparse{mod(\x+\y,2) ? "black" : "white"}
+        \edef\colour{\pgfmathresult}
+        \path[fill=\colour] (\x,\y) rectangle ++ (1,1);
+    }
+    \draw (0,0)--(0,8)--(8,8)--(8,0)--cycle;
+\end{tikzpicture}
+
+\end{document}
